@@ -139,53 +139,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Borel&family=Comfortaa:wght@500&family=Shantell+Sans&display=swap');
     </style>
 	
-	<script>
-    // Устанавливаем значение kvt1 равным 60
-    var kvt1 = 60;
 
-	</script>
-
-    <!-- JavaScript для анимаций -->
-    <script>
-        window.console = window.console || function(t) {};
-    </script>
-
-    <!-- JavaScript для анимации чисел -->
-    <script>
-        const time = 3;
-        const step = 1;
-        const k = Math.sqrt(10) / 80;
-
-        function outNum(num, elem) {
-        k1 = k * 50;
-        let e = document.querySelector('#out');
-        n = 0;
-        let t = Math.round(time);
-        let interval = setInterval(() => {
-            n = k1 * Math.sqrt(((n / k1)*(n / k1)) + 1);
-            if(Math.floor(n) == num) {
-                  clearInterval(interval);
-             }
-        e.innerHTML = Math.floor(n);
-        },
-    t);
-    };
-
-        function out1Num(num1, elem1) {
-        k2 = k * num1;
-        let e1 = document.querySelector('#out1');
-        n1 = 0;
-        let t1 = Math.round(time);
-        let interval = setInterval(() => {
-            n1 = k2 * Math.sqrt(((n1 / k2)*(n1 / k2)) + 1);
-            if(Math.floor(n1) == num1) {
-                  clearInterval(interval);
-             }
-        e1.innerHTML = Math.floor(n1);
-        },
-    t1);
-    };
-    </script>
+ 
 </head>
 
 <body>
@@ -226,30 +181,8 @@
 		</span>
 		</div>   
 		</section>
-	
-	
+	 
 
-
-    <!-- Секция "Электропотребление ДНаТ" -->
-    <section class="content" style="background-image: url('BG2.jpg');
-    background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      color: aliceblue; height:100vh">
-        <h1 style="padding-bottom: 50px; font-family: 'Comfortaa', cursive; text-shadow: 2px 0 2px #000;">
-            Электропотребление ДНаТ</h1>
-        <span style="padding-bottom: 50px; font-family: 'Comfortaa', cursive; text-shadow: 2px 0 2px #000; font-size: 30px"><span id="out1" class="out-num">0</span> кВт/ч</span>
-
-<script>
-    // Устанавливаем значение переменной kvt1
-    var kvt1 = 60;
-
-    // Находим элемент с id "out"
-    var outElement = document.getElementById("out");
-
-    // Устанавливаем текст элемента равным значению kvt1
-    outElement.textContent = kvt1;
-</script>
 
     </section>
 </content>
