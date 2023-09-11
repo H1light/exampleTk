@@ -19,7 +19,7 @@ function getDataFromGoogleSheet() {
     }).then(function (response) {
         var cellValue = response.result.values[0][0];
         // Обновляем значение на вашей веб-странице
-        document.getElementById('out').innerHTML = cellValue;
+        document.getElementById('num').innerHTML = cellValue;
     }, function (error) {
         console.error('Ошибка при загрузке данных: ', error.result.error.message);
     });
