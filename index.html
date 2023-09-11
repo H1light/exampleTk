@@ -222,7 +222,7 @@
 		Электропотребление LED</h1>
 		<div class="numbers__item">
 		<span style="padding-bottom: 50px; font-family: 'Comfortaa', cursive; text-shadow: 2px 0 2px #000; font-size: 30px">
-		<span id="out" class="out-num">50</span> кВт/ч</span>
+		<span id="out" class="out-num"></span> кВт/ч</span>
 		</span>
 		</div>   
 		</section>
@@ -239,11 +239,18 @@
         <h1 style="padding-bottom: 50px; font-family: 'Comfortaa', cursive; text-shadow: 2px 0 2px #000;">
             Электропотребление ДНаТ</h1>
         <span style="padding-bottom: 50px; font-family: 'Comfortaa', cursive; text-shadow: 2px 0 2px #000; font-size: 30px"><span id="out1" class="out-num">0</span> кВт/ч</span>
-      <script>
-        // Здесь будут вызываться функции outNum и out1Num для анимации чисел
-        outNum({{LED}}, '#out');
-        out1Num({{DNAT}}, '#out1');
-      </script>
+
+<script>
+    // Устанавливаем значение переменной kvt1
+    var kvt1 = 60;
+
+    // Находим элемент с id "out"
+    var outElement = document.getElementById("out");
+
+    // Устанавливаем текст элемента равным значению kvt1
+    outElement.textContent = kvt1;
+</script>
+
     </section>
 </content>
 <!-- Подключение jQuery и ваших скриптов -->
