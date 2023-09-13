@@ -146,47 +146,6 @@ nav #nav-close {
 
     </style>
 
-    <script>
-  window.console = window.console || function(t) {};
-
-    </script>
-
-  <script>
-    const time = 3;
-    const step = 1;
-    const k = Math.sqrt(10) / 80;
-
-    function outNum(num, elem) {
-    k1 = k * num;
-    let e = document.querySelector('#out');
-    n = 0;
-    let t = Math.round(time);
-    let interval = setInterval(() => {
-        n = k1 * Math.sqrt(((n / k1)*(n / k1)) + 1);
-        if(Math.floor(n) == num) {
-              clearInterval(interval);
-         }
-    e.innerHTML = Math.floor(n);
-    },
-t);
-};
-
-    function out1Num(num1, elem1) {
-    k2 = k * num1;
-    let e1 = document.querySelector('#out1');
-    n1 = 0;
-    let t1 = Math.round(time);
-    let interval = setInterval(() => {
-        n1 = k2 * Math.sqrt(((n1 / k2)*(n1 / k2)) + 1);
-        if(Math.floor(n1) == num1) {
-              clearInterval(interval);
-         }
-    e1.innerHTML = Math.floor(n1);
-    },
-t1);
-};
-  </script>
-
 </head>
 
 <body>
@@ -209,7 +168,56 @@ t1);
         <h1 style="font-family: 'Comfortaa', cursive; font-size: 80px; text-shadow: 2px 0 2px #000;">ТК "Дары
             природы"</h1>
     </section>
-    <section class="content" style="background-image: url('/static/BG.jpg');
+    
+	<script>
+    var out = 0; // Создаем переменную для хранения данных
+// Функция для анимации увеличения значения
+            function animateValue(id, start, end, duration) {
+                var range = end - start;
+                var current = start;
+                var increment = end > start ? 1 : -1;
+                var stepTime = Math.abs(Math.floor(duration / range));
+                var element = document.getElementById(id);
+
+                var timer = setInterval(function () {
+                    current += increment;
+                    element.textContent = current;
+                    if (current == end) {
+                        clearInterval(timer);
+                    }
+                }, stepTime);
+            }
+
+            // Задержка перед началом анимации
+            setTimeout(function () {
+                // Создаем запрос
+                var xhr = new XMLHttpRequest();
+
+                // Указываем метод и URL, на который нужно отправить запрос
+                xhr.open("GET", "https://script.google.com/macros/s/AKfycbw--UgGrq1WrgA_VF5VZqdIANsXhk1K03m4g6U5UbhD7Jy4hzWxlfL1yfWtajUe4yDu/exec", true);
+
+                // Устанавливаем обработчик события, который будет выполняться после завершения запроса
+                xhr.onreadystatechange = function () {
+                    // Проверяем, что запрос успешно завершен
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        // Парсим JSON-ответ
+                        var response = JSON.parse(xhr.responseText);
+
+                        // Извлекаем значение "Электропотребление" и сохраняем его в переменную
+                        var электропотребление = response.Электропотребление;
+
+                        // Запускаем анимацию увеличения значения
+                        animateValue("out", out, электропотребление,2000); // 2000 миллисекунд (2 секунды) для анимации
+                    }
+                };
+
+                // Отправляем запрос
+                xhr.send();
+            }, 2000); // Задержка в 2 секунды
+	
+  </script>
+	
+	<section class="content" style="background-image: url('/static/BG.jpg');
     background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -217,10 +225,17 @@ t1);
         <h1 style="padding-bottom: 50px; font-family: 'Comfortaa', cursive; text-shadow: 2px 0 2px #000;">
             Электропотребление LED</h1>
         <div class="numbers__item">
-        <span style="padding-bottom: 50px; font-family: 'Comfortaa', cursive; text-shadow: 2px 0 2px #000; font-size: 30px"><span id="out" class="out-num">0</span> кВт/ч</span>
-        </div>
+        
+		<span style="padding-bottom: 50px; font-family: 'Comfortaa', cursive; text-shadow: 2px 0 2px #000; font-size: 30px">
+		
+		<span id="out" class="out-num">0
+		
+		</span> кВт/ч</span>
+        
+		</div>
     </section>
-    <section class="content" style="background-image: url('exampleTk/static/BG2.jpg');
+    
+	<section class="content" style="background-image: url('exampleTk/static/BG2.jpg');
     background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -228,11 +243,12 @@ t1);
         <h1 style="padding-bottom: 50px; font-family: 'Comfortaa', cursive; text-shadow: 2px 0 2px #000;">
             Электропотребление ДНаТ</h1>
         <span style="padding-bottom: 50px; font-family: 'Comfortaa', cursive; text-shadow: 2px 0 2px #000; font-size: 30px"><span id="out1" class="out-num">0</span> кВт/ч</span>
-      <script>
-		outNum({{LED}}, '#out');
-		out1Num({{DNAT}}, '#out1');
-	  </script>
+     
+
     </section>
+	
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+	
 </content>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 </body>
