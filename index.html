@@ -1,69 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Google Sheets API</title>
-	
-		 <style>
-        .out-num {
-            padding-bottom: 50px;
-            font-family: 'Comfortaa', cursive;
-            text-shadow: 2px 0 2px #000;
-            font-size: 30px;
-        }
-    </style>
-	
+  <title>Получение данных из JSON</title>
 </head>
 <body>
-	<span id="output" class="out-num">0</span> кВт/ч
-    <div id="output"></div>
+  <h1>Данные об электропотреблении</h1>
+  <p id="electricityData">Здесь будет отображаться электропотребление.</p>
 
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        // Замените на путь к вашему файлу с ключами доступа JSON
-        const credentialsPath = 'C:\Users\ekug\Desktop\tkexample-e99e5d7ec376.json';
+  <script>
+    // Создаем запрос
+    var xhr = new XMLHttpRequest();
 
-        // Замените на идентификатор вашей Google Таблицы
-        const spreadsheetId = '1KeUxat0h4eddrYhc3UfY6QnzCiOUHHWTFd7886CGKvM';
-        const range = 'Sheet1!C2'; // Здесь указывается нужная ячейка
+    // Указываем метод и URL, на который нужно отправить запрос
+    xhr.open("GET", "https://script.google.com/macros/s/AKfycbw--UgGrq1WrgA_VF5VZqdIANsXhk1K03m4g6U5UbhD7Jy4hzWxlfL1yfWtajUe4yDu/exec", true);
 
-        // Аутентификация и запрос к Google Таблицам
-        function fetchCellValue() {
-            gapi.load('client:auth2', () => {
-                gapi.client.init({
-                    apiKey: 'AIzaSyDESenNmzllNkPITS73TQUldLivKeqjCg8',
-                    clientId: '110295285327282200396',
-                    discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
-                    scope: 'https://www.googleapis.com/auth/spreadsheets.readonly',
-                }).then(() => {
-                    gapi.auth2.getAuthInstance().signIn();
-                    gapi.client.sheets.spreadsheets.values.get({
-                        spreadsheetId,
-                        range,
-                    }).then((response) => {
-                        const cellValue = response.result.values[0][0];
-                        document.getElementById('output').textContent = `Значение из C2: ${cellValue}`;
-                    }, (error) => {
-                        console.error('Ошибка:', error);
-                    });
-                });
-            });
-        }
+    // Устанавливаем обработчик события, который будет выполняться после завершения запроса
+    xhr.onreadystatechange = function () {
+      // Проверяем, что запрос успешно завершен
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // Парсим JSON-ответ
+        var response = JSON.parse(xhr.responseText);
 
-        // Замените YOUR_API_KEY и YOUR_CLIENT_ID на ваши значения
-        gapi.load('client:auth2', fetchCellValue);
+        // Извлекаем значение "Электропотребление" и сохраняем его в переменную
+        var электропотребление = response.Электропотребление;
 
-    </script>
-	
-	<script>
-        // Ваша переменная
-        var yourVariable = cellValue; // Здесь можно указать любое значение
+        // Отображаем данные на странице
+        document.getElementById("electricityData").textContent = "Электропотребление: " + электропотребление;
+      }
+    };
 
-        // Находим элемент с id "output"
-        var outputElement = document.getElementById("output");
-
-        // Устанавливаем текст элемента равным значению вашей переменной
-        outputElement.textContent = yourVariable;
-    </script>
-	
+    // Отправляем запрос
+    xhr.send();
+  </script>
 </body>
 </html>
